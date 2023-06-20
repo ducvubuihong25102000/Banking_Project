@@ -1,0 +1,4 @@
+CREATE DATABASE [Bank_OLAP]
+GO
+USE [Bank_OLAP]
+GO

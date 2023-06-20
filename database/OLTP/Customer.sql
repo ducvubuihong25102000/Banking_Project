@@ -1,0 +1,15 @@
+--DROP TABLE [Stg].[FOCompany]
+USE [Bank]
+GO
+CREATE TABLE IF NOT EXISTS [Customer]
+(
+	Cust_index INT IDENTITY(0,1),
+	cust_Id NVARCHAR(20) NOT NULL,
+	birth DATE,
+
+);
+CONSTRAINT [PK_CUSTOMER_CUST_INDEX] PRIMARY KEY NONCLUSTERED 
+	(
+		[Cust_index] ASC
+	) NOT ENFORCED 
+);

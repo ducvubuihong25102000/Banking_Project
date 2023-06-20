@@ -1,5 +1,5 @@
 --DROP TABLE [Stg].[FOCompany]
-USE [Bank]
+USE [Bank_OLAP]
 GO
 CREATE TABLE IF NOT EXISTS [Stg].[Customer]
 (

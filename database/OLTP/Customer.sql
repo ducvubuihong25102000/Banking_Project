@@ -1,15 +1,19 @@
---DROP TABLE [Stg].[FOCompany]
 USE [Bank]
 GO
-CREATE TABLE IF NOT EXISTS [Customer]
-(
-	Cust_index INT IDENTITY(0,1),
-	cust_Id NVARCHAR(20) NOT NULL,
-	birth DATE,
-
-);
-CONSTRAINT [PK_CUSTOMER_CUST_INDEX] PRIMARY KEY NONCLUSTERED 
-	(
-		[Cust_index] ASC
-	) NOT ENFORCED 
-);
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE [name] = 'Customer' AND [xtype] = 'U')
+	CREATE TABLE [Customer](
+		[Cust_index] INT IDENTITY(1,1) PRIMARY KEY,
+		[cust_Id] NVARCHAR(20) NOT NULL,
+		[birth] DATE NOT NULL,
+		[address] NVARCHAR(100) NOT NULL,
+		[district] NVARCHAR(100) NOT NULL,
+		[ward] NVARCHAR(100) NOT NULL,
+		[city] NVARCHAR(100) NOT NULL,
+		[Branch_index] INT,
+	);
+GO
+--ALTER TABLE [Customer] ADD CONSTRAINT [PK_CUSTOMER_CUST_INDEX] PRIMARY KEY CLUSTERED 
+--	(
+--		[Cust_index] ASC
+--	) NOT ENFORCED 
+--);

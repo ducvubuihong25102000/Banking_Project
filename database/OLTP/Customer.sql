@@ -1,7 +1,7 @@
 USE [Bank]
 GO
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE [name] = 'Customer' AND [xtype] = 'U')
-	CREATE TABLE [Customer](
+	CREATE TABLE [Customers](
 		[Cust_index] INT IDENTITY(1,1) PRIMARY KEY,
 		[cust_Id] NVARCHAR(20) NOT NULL,
 		[birth] DATE NOT NULL,

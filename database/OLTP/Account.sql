@@ -1,7 +1,7 @@
 USE [Bank]
 GO
 IF NOT EXISTS(SELECT * FROM sysobjects WHERE [name] = 'Account' AND [xtype] = 'U')
-	CREATE TABLE [Account]
+	CREATE TABLE [Accounts]
 	(
 		[Account_index] INT IDENTITY(1,1) PRIMARY KEY,
 		[Cust_index] INT NOT NULL,
@@ -17,15 +17,17 @@ IF NOT EXISTS(SELECT * FROM sysobjects WHERE [name] = 'Account' AND [xtype] = 'U
 	)
 
 
-ALTER TABLE [Account] ADD CONSTRAINT [df_account_type] DEFAULT 1 FOR [account_type]
-ALTER TABLE [Account] ADD CONSTRAINT [df_careted_on] DEFAULT GETDATE() FOR [created_on]
-ALTER TABLE [Account] ADD CONSTRAINT [df_balance] DEFAULT 50000.00 FOR [balance]
+ALTER TABLE [Accounts] ADD CONSTRAINT [df_account_type] DEFAULT 1 FOR [account_type]
+ALTER TABLE [Accounts] ADD CONSTRAINT [df_created_on] DEFAULT GETDATE() FOR [created_on]
+ALTER TABLE [Accounts] ADD CONSTRAINT [df_balance] DEFAULT 50000.00 FOR [balance]
 
-ALTER TABLE [Account] ADD CONSTRAINT [fk_Customer]  FOREIGN KEY ([Cust_index]) REFERENCES Customer([Cust_index])
-
---CREATE TRIGGER [df_credit_limit] ON [Account]
---AFTER INSERT
---AS
---BEGIN
---	IF 
---	UPDATE 
+CREATE TRIGGER [df_credit_limit] ON [Accounts]
+AFTER INSERT
+AS
+BEGIN 
+	UPDATE  [Accounts]
+	SET [credit_balance] = [balance]
+	FROM [Accounts]
+	WHERE [Accounts].[credit_balance] = NULL
+END
+GO		

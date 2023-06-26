@@ -15,5 +15,3 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE [name] = 'Transactions' AND [xtype
 ALTER TABLE [Transactions] ADD CONSTRAINT [df_status] DEFAULT 2 FOR [status]
 ALTER TABLE [Transactions] ADD CONSTRAINT [df_date] DEFAULT GETDATE() FOR [date]
 ALTER TABLE [Transactions] ADD CONSTRAINT [min_amount] CHECK ([amount] > 0)
-
-ALTER TABLE [Transactions] ADD CONSTRAINT [fk_Account] FOREIGN KEY ([start_account]) REFERENCES Account([Account_index])
